@@ -1,0 +1,28 @@
+{
+  "name": "rinha-frontend",
+  "version": "1.0.0",
+  "description": "Este é o repositório da Rinha de Frontend. Esta é uma brincadeira e um desafio de código inspirada pela _\"Rinha de Backend\"_, uma iniciativa criada por Francisco Franceschi.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "npx playwright test",
+    "test": "npx playwright test --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtmonteiro/rinha-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rtmonteiro/rinha-frontend/issues"
+  },
+  "homepage": "https://github.com/rtmonteiro/rinha-frontend#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.4"
+  }
+}
