@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rinha de Frontend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            color: #000;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            display: grid;
+            place-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        p {
+            font-size: 24px;
+        }
+        input[type="file"] {
+            visibility: hidden;
+        }
+        label {
+            padding: 6px 12px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #000;
+            background: linear-gradient(180deg, #E4E4E4 0%, #F7F7F7 100%);
+        }
+        .input {
+            width: 110px;
+        }
+        .error {
+            display: none;
+            font-size: 16px;
+            color: #BF0E0E;
+        }
+        .error.show {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON Tree Viewer</h1>
+        <p>Simple JSON Viewer that runs completely on-client. No data exchange</p>
+        <div class="input">
+            <label for="up_file">Load JSON</label>
+            <input type="file" name="up_file" id="up_file" accept=".json">
+        </div>
+        <p class="error">Invalid file. Please load a valid JSON file.</p>
+    </div>
+</body>
+</html>
