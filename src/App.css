@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+p {
+  font-size: 24px;
+}
+input[type="file"] {
+  visibility: hidden;
+}
+label {
+  padding: 6px 12px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background: linear-gradient(180deg, #E4E4E4 0%, #F7F7F7 100%);
+}
+.input {
+  width: 110px;
+}
+.error {
+  display: none;
+  font-size: 16px;
+  color: #BF0E0E;
+}
+.error.show {
+  display: block;
+}
