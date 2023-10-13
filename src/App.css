@@ -29,10 +29,15 @@ label {
   width: 110px;
 }
 .error {
-  display: none;
   font-size: 16px;
   color: #BF0E0E;
 }
-.error.show {
-  display: block;
+
+.value {
+  transform: translateX(50px);
+}
+.value::before, .key::before {
+  content: "|";
+  position: absolute;
+  left: -50px;
 }
