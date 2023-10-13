@@ -12,6 +12,10 @@ h1 {
   font-size: 48px;
   font-weight: 700;
 }
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+}
 p {
   font-size: 24px;
 }
@@ -34,10 +38,25 @@ label {
 }
 
 .value {
-  transform: translateX(50px);
+  transform: translateX(20px);
+}
+.key.array::after {
+  content: "[";
+  position: relative;
+  right: -10px;
 }
 .value::before, .key::before {
-  content: "|";
+  content: "";
   position: absolute;
-  left: -50px;
+  left: -20px;
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+}
+
+.node {
+  transform: translateX(20px);
+}
+.tree > .node {
+  transform: unset;
 }
