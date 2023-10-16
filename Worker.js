@@ -9,9 +9,10 @@ async function parseJsonFile(file) {
         fileReader.readAsArrayBuffer(file)
     })
 }
-console.log('Worker Started')
 
 onmessage = async (event) => {
+    const start = Date.now();
     const value = await parseJsonFile(event.data);
+    console.log(`Worker: ${Date.now() - start}ms`);
     postMessage(value);
 };

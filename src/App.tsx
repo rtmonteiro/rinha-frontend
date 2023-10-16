@@ -16,17 +16,20 @@ function App() {
 
     w.onmessage = (res) => {
       const arrBuff = res.data;
-      const json = JSON.parse(new TextDecoder().decode(arrBuff as ArrayBuffer));
-      setError(false);
-      setObject(json);
-    };
-
-    w.onmessageerror = (err) => {
-      if (err instanceof SyntaxError) {
-        console.log("Invalid JSON file");
-        setError(true);
+      const start = Date.now();
+      let json = null;
+      try {
+        json = JSON.parse(new TextDecoder().decode(arrBuff as ArrayBuffer));
+        setError(false);
+      } catch (err) {
+        if (err instanceof SyntaxError) {
+          console.log("Invalid JSON file");
+          setError(true);
+        }  
       }
-      return null;
+      console.log(`Parse JSON: ${Date.now() - start}ms`);
+      // console.log(json);
+      setObject(json);
     };
   }
 
