@@ -1,5 +1,5 @@
 import "./App.css";
-import { createSignal, onCleanup, onMount, Show } from "solid-js";
+import { createSignal, onCleanup, Show } from "solid-js";
 import { RenderObj } from "./components/RenderObj";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
       return null;
     };
   }
-  
+
   onCleanup(() => {
     w.terminate();
   });
