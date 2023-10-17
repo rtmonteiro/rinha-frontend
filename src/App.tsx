@@ -1,45 +1,50 @@
 import "./App.css";
-import { createSignal, Show } from "solid-js";
-import { RenderObj } from "./components/RenderObj";
+import {createSignal, onCleanup, Show} from "solid-js";
+import {RenderObj} from "./components/RenderObj";
 import JSONWorker from "./lib/JSONWorker?worker";
 
 function App() {
-  let [object, setObject] = createSignal(null as any);
-  let [error, setError] = createSignal(false);
-  let [fileName, setFileName] = createSignal("");
+  const [object, setObject] = createSignal(null as any);
+  const [error, setError] = createSignal(false);
+  const [fileName, setFileName] = createSignal("");
+  const [loading, setLoading] = createSignal(false);
 
   let w: Worker;
 
   async function handleUploadFile(e: { target: any }) {
+    setLoading(true)
     const file = e?.target?.files[0];
     setFileName(file.name);
 
     if (window.Worker) {
-      if (!(w instanceof Worker)) {
-        w = new JSONWorker();
+      w = new JSONWorker();
 
-        w.postMessage(file);
+      w.postMessage(file);
 
-        w.onmessage = (res) => {
-          const arrBuff = res.data;
-          const start = Date.now();
-          let json = null;
-          try {
-            json = JSON.parse(new TextDecoder().decode(arrBuff as ArrayBuffer));
-            setError(false);
-          } catch (err) {
-            if (err instanceof SyntaxError) {
-              console.log("Invalid JSON file");
-              setError(true);
-            }
+      w.onmessage = (res) => {
+        const arrBuff = res.data;
+        const start = Date.now();
+        let json = null;
+        try {
+          json = JSON.parse(new TextDecoder().decode(arrBuff as ArrayBuffer));
+          setError(false);
+        } catch (err) {
+          if (err instanceof SyntaxError) {
+            console.log("Invalid JSON file");
+            setError(true);
           }
-          console.log(`Parse JSON: ${Date.now() - start}ms`);
-          // console.log(json);
-          setObject(json);
-        };
-      }
+        }
+        setLoading(false)
+        console.log(`Parse JSON: ${Date.now() - start}ms`);
+        // console.log(json);
+        setObject(json);
+      };
     }
   }
+
+  onCleanup(() => {
+    if (w) w.terminate();
+  })
 
   return (
     <>
@@ -49,7 +54,7 @@ function App() {
           <p>
             Simple JSON Viewer that runs completely on-client. No data exchange
           </p>
-          <div class="input">
+          <div class="input" classList={{loading: loading()}}>
             <label for="up_file">Load JSON</label>
             <input
               onChange={handleUploadFile}
@@ -66,7 +71,7 @@ function App() {
         <Show when={object() !== null}>
           <h2>{fileName()}</h2>
           <div class="tree">
-            <RenderObj object={object()} />
+            <RenderObj object={object()}/>
           </div>
         </Show>
       </div>

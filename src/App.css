@@ -44,3 +44,21 @@ label {
   font-size: 16px;
   color: #BF0E0E;
 }
+
+.loading {
+  animation-duration: 2s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  transform-origin: 50% 25%;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
