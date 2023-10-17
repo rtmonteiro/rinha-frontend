@@ -1,3 +1,11 @@
+:root {
+  --offwhite: #F2CAB8;
+  --black: #000000;
+  --blue: #4E9590;
+  --gray: #BFBFBF;
+
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -35,28 +43,4 @@ label {
 .error {
   font-size: 16px;
   color: #BF0E0E;
-}
-
-.value {
-  transform: translateX(20px);
-}
-.key.array::after {
-  content: "[";
-  position: relative;
-  right: -10px;
-}
-.value::before, .key::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  width: 2px;
-  height: 100%;
-  background-color: #000;
-}
-
-.node {
-  transform: translateX(20px);
-}
-.tree > .node {
-  transform: unset;
 }

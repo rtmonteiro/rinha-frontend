@@ -1,3 +1,4 @@
+import "./RenderObj.css";
 import {
   For,
   Switch,
@@ -6,11 +7,11 @@ import {
   onMount,
   createEffect,
 } from "solid-js";
-import { createMutable } from "solid-js/store";
+import {createMutable} from "solid-js/store";
 
 const OFFSET = 40;
 
-export const RenderObj = ({ object }: { object: Record<string, any> }) => {
+export const RenderObj = ({object}: { object: Record<string, any> }) => {
   const [isOpen, setIsOpen] = createSignal(false);
   const [tam, setTam] = createSignal(OFFSET);
   const [objSliced, setObjSliced] = createSignal(
@@ -44,7 +45,7 @@ export const RenderObj = ({ object }: { object: Record<string, any> }) => {
   return (
     <For each={objSliced()}>
       {(key, index) => (
-        <div class="node" classList={{last:index() === objSliced().length - 1}}>
+        <div class="node" classList={{last: index() === objSliced().length - 1}}>
           <Switch>
             <Match
               when={typeof object[key] === "object" && object[key] !== null}
@@ -53,30 +54,35 @@ export const RenderObj = ({ object }: { object: Record<string, any> }) => {
                 <summary>
                   <p
                     class="key"
-                    classList={{ array: Array.isArray(object[key]) }}
+                    classList={{
+                      array: Array.isArray(object[key]),
+                      index: !isNaN(Number(key)),
+                    }}
                   >
                     {key}:
                   </p>
                 </summary>
-                {isOpen() && <RenderObj object={object[key]} />}
+                {isOpen() && <RenderObj object={object[key]}/>}
               </details>
             </Match>
             <Match when={object[key] === null}>
-              <p class="value">{key}: null</p>
+              <p class="value">
+                <span class="key">{key}:</span> null
+              </p>
             </Match>
             <Match when={typeof object[key] === "string"}>
               <p class="value">
-                {key}: "{object[key]}"
+                <span class="key">{key}:</span> "{object[key]}"
               </p>
             </Match>
             <Match when={typeof object[key] === "number"}>
               <p class="value">
-                {key}: {object[key]}
+                <span class="key">{key}:</span> {object[key]}
               </p>
             </Match>
             <Match when={typeof object[key] === "boolean"}>
               <p class="value">
-                {key}: {object[key] ? "true" : "false"}
+                <span class="key">{key}:</span> {object[key] ? "true" : "false"}
               </p>
             </Match>
           </Switch>

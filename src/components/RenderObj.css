@@ -1,0 +1,46 @@
+summary {
+    cursor: pointer;
+    display: flex;
+}
+
+details:has(>summary>.key.array):after {
+    content: "]";
+    color: var(--offwhite);
+    font-size: 24px;
+}
+
+.key {
+    color: var(--blue);
+}
+.index {
+    color: var(--gray);
+}
+
+.value {
+    transform: translateX(20px);
+    color: var(--black);
+}
+.value>.key {
+    color: var(--blue);
+}
+.key.array::after {
+    content: "[";
+    position: relative;
+    right: -10px;
+    color: var(--offwhite);
+}
+.value::before, .key::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    width: 2px;
+    height: 100%;
+    background-color: var(--gray);
+}
+
+.node {
+    transform: translateX(20px);
+}
+.tree > .node {
+    transform: unset;
+}
